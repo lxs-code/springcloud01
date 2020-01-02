@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Service
-@FeignClient("eureka-consumer-analyze")
+@FeignClient("eureka-provider-analyze")
 public interface  AttentionFeigin {
 
     @RequestMapping("/attention/selectState")

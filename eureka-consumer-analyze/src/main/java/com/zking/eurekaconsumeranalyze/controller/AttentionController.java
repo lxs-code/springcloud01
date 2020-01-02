@@ -15,14 +15,12 @@ public class AttentionController {
     @RequestMapping("selectState")
     public String selectState() {
         String data = attentionFeigin.selectState();
-
         return data;
     }
 
     @RequestMapping("selectDate")
     public String selectDate() {
         String data = attentionFeigin.selectDate();
-
         return data;
     }
 
