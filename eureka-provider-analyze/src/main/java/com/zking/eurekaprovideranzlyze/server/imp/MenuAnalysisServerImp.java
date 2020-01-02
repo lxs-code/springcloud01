@@ -1,7 +1,6 @@
 package com.zking.eurekaprovideranzlyze.server.imp;
 
 import com.zking.eurekaprovideranzlyze.mapper.MenuAnalysisMapper;
-import com.zking.eurekaprovideranzlyze.model.MenuAnalysis;
 import com.zking.eurekaprovideranzlyze.server.MenuAnalysisServer;
 import com.zking.eurekaprovideranzlyze.vo.MenuAnalysisVo;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package com.zking.eurekaprovideranzlyze.server;
 
-import com.zking.eurekaprovideranzlyze.model.MenuAnalysis;
 import com.zking.eurekaprovideranzlyze.vo.MenuAnalysisVo;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,5 @@
 package com.zking.eurekaprovideranzlyze.controller;
 
-import com.zking.eurekaprovideranzlyze.model.MenuAnalysis;
 import com.zking.eurekaprovideranzlyze.server.MenuAnalysisServer;
 import com.zking.eurekaprovideranzlyze.vo.MenuAnalysisVo;
 import com.zking.vo.util.JsonData;
