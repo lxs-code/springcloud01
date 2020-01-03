@@ -17,21 +17,30 @@ public class ClientController {
     private ClientServer clientServer;
 
     @RequestMapping("selectAll")
-    public JsonData selectAll(){
+    public JsonData selectAll() {
         JsonData jsonData = new JsonData();
         List<ClientVo> list = clientServer.selectAll();
         jsonData.setResult(list);
         jsonData.setCode(0);
-        return  jsonData;
+        return jsonData;
     }
 
     @RequestMapping("selectDate")
-    public JsonData selectDate(){
+    public JsonData selectDate() {
         JsonData jsonData = new JsonData();
         List<ClientVo> list = clientServer.selectDate();
         jsonData.setResult(list);
         jsonData.setCode(0);
-        return  jsonData;
+        return jsonData;
+    }
+
+    @RequestMapping("selectDate1")
+    public JsonData selectDate1() {
+        JsonData jsonData = new JsonData();
+        List<ClientVo> list = clientServer.selectDate1();
+        jsonData.setResult(list);
+        jsonData.setCode(0);
+        return jsonData;
     }
 
 }

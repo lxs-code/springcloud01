@@ -17,9 +17,11 @@ public class Client {
 
     private Date banktime;
 
+    private Date regtime;
+
     private Long integral;
 
-    public Client(Integer cid, String cname, String cpassword, String sex, String phone, Long bank, Long integral, Date banktime) {
+    public Client(Integer cid, String cname, String cpassword, String sex, String phone, Long bank, Long integral, Date banktime, Date regtime) {
         this.cid = cid;
         this.cname = cname;
         this.cpassword = cpassword;
@@ -28,6 +30,7 @@ public class Client {
         this.bank = bank;
         this.integral = integral;
         this.banktime = banktime;
+        this.regtime = regtime;
     }
 
     public Client() {
@@ -92,6 +95,14 @@ public class Client {
 
     public Date getBanktime() {
         return banktime;
+    }
+
+    public Date getRegtime() {
+        return regtime;
+    }
+
+    public void setRegtime(Date regtime) {
+        this.regtime = regtime;
     }
 
     public void setBanktime(Date banktime) {

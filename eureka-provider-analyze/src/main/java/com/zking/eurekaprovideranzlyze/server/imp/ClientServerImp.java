@@ -23,4 +23,9 @@ public class ClientServerImp implements ClientServer{
     public List<ClientVo> selectDate() {
         return clientMapper.selectDate();
     }
+
+    @Override
+    public List<ClientVo> selectDate1() {
+        return clientMapper.selectDate1();
+    }
 }

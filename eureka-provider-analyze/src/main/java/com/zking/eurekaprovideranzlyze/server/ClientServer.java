@@ -11,4 +11,6 @@ public interface ClientServer {
     List<ClientVo> selectAll();
 //    查询绑定时间
     List<ClientVo> selectDate();
+
+    List<ClientVo> selectDate1();
 }

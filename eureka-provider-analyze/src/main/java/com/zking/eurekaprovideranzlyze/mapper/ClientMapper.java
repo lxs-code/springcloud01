@@ -18,6 +18,8 @@ public interface ClientMapper {
 
     List<ClientVo> selectDate();
 
+    List<ClientVo> selectDate1();
+
     int updateByPrimaryKeySelective(Client record);
 
     int updateByPrimaryKey(Client record);
