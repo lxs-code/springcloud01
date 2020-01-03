@@ -20,7 +20,7 @@ public interface CommodityServer {
     int up(Commodity commodity);
 
     @Transactional(readOnly = true)
-    List<Commodity> list(PageBean pageBean);
+    List<Commodity> list(Commodity commodity,PageBean pageBean);
 
     @Transactional
     int update(Commodity commodity);

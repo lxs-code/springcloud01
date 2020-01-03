@@ -18,7 +18,7 @@ public interface CommodityMapper {
 
     int updateByPrimaryKey(Commodity record);
 
-    List<Commodity> list(PageBean pageBean);
+    List<Commodity> list(Commodity commodity);
 
     int update(Commodity commodity);
 

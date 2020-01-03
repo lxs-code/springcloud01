@@ -37,6 +37,7 @@
     select
     *
     from t_commodity
+    WHERE t_comname like concat('%',#{tComname,jdbcType=VARCHAR },'%')
     ORDER BY t_comid desc
     </select>
 

@@ -31,19 +31,19 @@ public class CommodityController {
         private CommodityServer commodityServer;
         @RequestMapping("/list")
         @ResponseBody
-        public JsonData list( PageBean pageBean){
+        public JsonData list(Commodity commodity, PageBean pageBean){
         System.out.println(pageBean.getPage()+","+pageBean.getRows());
-        List<Commodity> list = commodityServer.list(pageBean);
+//        List<Commodity> list = commodityServer.list(commodity,pageBean);
 
-//            if(null==commodity.gettComname()||commodity.gettComname()==""){
-//                commodity.settComname("");
-//            }
-//
-//            System.out.println(commodity.gettComname());
-//            List<Commodity> list = commodityServer.list(commodity.gettComname(),pageBean);
-//            for (Commodity com:list){
-//                System.out.println(com.gettComname());
-//            }
+            if(null==commodity.gettComname()||commodity.gettComname()==""){
+                commodity.settComname("");
+            }
+
+            System.out.println(commodity.gettComname());
+            List<Commodity> list = commodityServer.list(commodity,pageBean);
+            for (Commodity com:list){
+                System.out.println(com.gettComname());
+            }
             jsonData.setResult(list);
             jsonData.setCode(0);
             jsonData.setTotal(pageBean.getTotal());

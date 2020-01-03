@@ -32,11 +32,11 @@ public class CommodityServerImpl implements CommodityServer {
     }
 
     @Override
-    public List<Commodity> list( PageBean pageBean) {
+    public List<Commodity> list(Commodity commodity, PageBean pageBean) {
         if (null != pageBean && pageBean.isPagination()) {
             PageHelper.startPage(pageBean.getPage(), pageBean.getRows());
         }
-        List<Commodity>lists = commodityMapper.list(pageBean);
+        List<Commodity>lists = commodityMapper.list(commodity);
 
         if (null != pageBean && pageBean.isPagination()) {
             PageInfo pageInfo = new PageInfo(lists);
