@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovidershh.mapper.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.eurekaprovidershh.model.Organization" >
+    <constructor >
+      <idArg column="orgaid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="organame" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orgadate" jdbcType="TIMESTAMP" javaType="java.lang.String" />
+      <arg column="orgastate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ordadivide" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orgaid, organame, orgadate, orgastate, ordadivide
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_organization
+    where orgaid = #{orgaid,jdbcType=INTEGER}
+  </select>
+
+  <select id="list" resultMap="BaseResultMap" parameterType="com.zking.eurekaprovidershh.model.Organization" >
+    select
+    *
+    from tb_organization
+    where organame like  concat('%',#{organame,jdbcType=VARCHAR },'%')
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_organization
+    where orgaid = #{orgaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.eurekaprovidershh.model.Organization" >
+    insert into tb_organization (orgaid, organame, orgadate, 
+      orgastate, ordadivide)
+    values (#{orgaid,jdbcType=INTEGER}, #{organame,jdbcType=VARCHAR}, #{orgadate,jdbcType=TIMESTAMP}, 
+      #{orgastate,jdbcType=VARCHAR}, #{ordadivide,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.eurekaprovidershh.model.Organization" >
+    insert into tb_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgaid != null" >
+        orgaid,
+      </if>
+      <if test="organame != null" >
+        organame,
+      </if>
+      <if test="orgadate != null" >
+        orgadate,
+      </if>
+      <if test="orgastate != null" >
+        orgastate,
+      </if>
+      <if test="ordadivide != null" >
+        ordadivide,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgaid != null" >
+        #{orgaid,jdbcType=INTEGER},
+      </if>
+      <if test="organame != null" >
+        #{organame,jdbcType=VARCHAR},
+      </if>
+      <if test="orgadate != null" >
+        #{orgadate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgastate != null" >
+        #{orgastate,jdbcType=VARCHAR},
+      </if>
+      <if test="ordadivide != null" >
+        #{ordadivide,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.eurekaprovidershh.model.Organization" >
+    update tb_organization
+    <set >
+      <if test="organame != null" >
+        organame = #{organame,jdbcType=VARCHAR},
+      </if>
+      <if test="orgadate != null" >
+        orgadate = #{orgadate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgastate != null" >
+        orgastate = #{orgastate,jdbcType=VARCHAR},
+      </if>
+      <if test="ordadivide != null" >
+        ordadivide = #{ordadivide,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orgaid = #{orgaid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.zking.eurekaprovidershh.model.Organization" >
+    update tb_organization
+    set organame = #{organame,jdbcType=VARCHAR},
+      orgadate = #{orgadate,jdbcType=TIMESTAMP},
+      orgastate = #{orgastate,jdbcType=VARCHAR},
+      ordadivide = #{ordadivide,jdbcType=VARCHAR}
+    where orgaid = #{orgaid,jdbcType=INTEGER}
+  </update>
+</mapper>
