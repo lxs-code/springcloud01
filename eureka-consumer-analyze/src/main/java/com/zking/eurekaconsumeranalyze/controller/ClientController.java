@@ -25,4 +25,9 @@ public class ClientController {
         return data;
     }
 
+    @RequestMapping("selectDate1")
+    public String selectDate1() {
+        String data = clientFeigin.selectDate1();
+        return data;
+    }
 }

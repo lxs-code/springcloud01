@@ -16,4 +16,7 @@ public interface ClientFeigin {
     //    查询绑定时间
     @RequestMapping("/client/selectDate")
     String selectDate();
+
+    @RequestMapping("/client/selectDate1")
+    String selectDate1();
 }
