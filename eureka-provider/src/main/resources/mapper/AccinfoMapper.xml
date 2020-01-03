@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovider.mapper.AccinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.eurekaprovider.model.Accinfo" >
+    <constructor >
+      <arg column="t_accid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_accno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_accname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_cname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_platkey" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_summary" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_operno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_opertime" jdbcType="TIMESTAMP" javaType="java.lang.String" />
+      <arg column="t_state" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+
+  <select id="list"  resultMap="BaseResultMap" parameterType="com.zking.eurekaprovider.model.Accinfo">
+    select
+    *
+    from t_accinfo
+    WHERE t_accname like concat('%',#{tAccname,jdbcType=VARCHAR },'%')
+  </select>
+  <insert id="insert" parameterType="com.zking.eurekaprovider.model.Accinfo" >
+    insert into t_accinfo (t_accid, t_accno, t_accname, 
+      t_cname, t_phone, t_platkey, 
+      t_summary, t_operno, t_opertime, 
+      t_state)
+    values (#{tAccid,jdbcType=INTEGER}, #{tAccno,jdbcType=VARCHAR}, #{tAccname,jdbcType=VARCHAR}, 
+      #{tCname,jdbcType=VARCHAR}, #{tPhone,jdbcType=VARCHAR}, #{tPlatkey,jdbcType=VARCHAR}, 
+      #{tSummary,jdbcType=VARCHAR}, #{tOperno,jdbcType=VARCHAR}, #{tOpertime,jdbcType=TIMESTAMP}, 
+      #{tState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.eurekaprovider.model.Accinfo" >
+    insert into t_accinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tAccid != null" >
+        t_accid,
+      </if>
+      <if test="tAccno != null" >
+        t_accno,
+      </if>
+      <if test="tAccname != null" >
+        t_accname,
+      </if>
+      <if test="tCname != null" >
+        t_cname,
+      </if>
+      <if test="tPhone != null" >
+        t_phone,
+      </if>
+      <if test="tPlatkey != null" >
+        t_platkey,
+      </if>
+      <if test="tSummary != null" >
+        t_summary,
+      </if>
+      <if test="tOperno != null" >
+        t_operno,
+      </if>
+      <if test="tOpertime != null" >
+        t_opertime,
+      </if>
+      <if test="tState != null" >
+        t_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tAccid != null" >
+        #{tAccid,jdbcType=INTEGER},
+      </if>
+      <if test="tAccno != null" >
+        #{tAccno,jdbcType=VARCHAR},
+      </if>
+      <if test="tAccname != null" >
+        #{tAccname,jdbcType=VARCHAR},
+      </if>
+      <if test="tCname != null" >
+        #{tCname,jdbcType=VARCHAR},
+      </if>
+      <if test="tPhone != null" >
+        #{tPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tPlatkey != null" >
+        #{tPlatkey,jdbcType=VARCHAR},
+      </if>
+      <if test="tSummary != null" >
+        #{tSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="tOperno != null" >
+        #{tOperno,jdbcType=VARCHAR},
+      </if>
+      <if test="tOpertime != null" >
+        #{tOpertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tState != null" >
+        #{tState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
