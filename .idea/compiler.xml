@@ -2,14 +2,23 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true">
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$" />
+        </processorPath>
+      </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="configserver" />
+        <module name="eureka-consumer-analyze" />
         <module name="eureka-consumer02" />
         <module name="eureka-provider" />
+        <module name="eureka-provider-analyze" />
+        <module name="eureka-provider-attention" />
+        <module name="eureka-provider-shh" />
         <module name="eureka-server" />
         <module name="gateway" />
         <module name="vo" />
@@ -19,9 +28,13 @@
       <module name="config-server" target="1.8" />
       <module name="configserver" target="1.8" />
       <module name="demo" target="1.8" />
+      <module name="eureka-consumer-analyze" target="1.8" />
       <module name="eureka-consumer01" target="1.8" />
       <module name="eureka-consumer02" target="1.8" />
       <module name="eureka-provider" target="1.8" />
+      <module name="eureka-provider-analyze" target="1.8" />
+      <module name="eureka-provider-attention" target="1.8" />
+      <module name="eureka-provider-shh" target="1.8" />
       <module name="eureka-server" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="l" target="1.8" />
