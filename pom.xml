@@ -26,6 +26,9 @@
     <module>eureka-server</module>
     <module>eureka-provider</module>
     <!--<module>eureka-consumer01</module>-->
+    <module>eureka-provider-shh</module>
+    <module>eureka-provider-analyze</module>
+    <!--<module></module>-->
     <module>eureka-consumer02</module>
     <module>vo</module>
     <module>gateway</module>
@@ -76,6 +79,7 @@
       <version>2.2.3</version>
       <classifier>jdk15</classifier>
     </dependency>
+
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
