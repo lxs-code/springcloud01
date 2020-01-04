@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zking</groupId>
+		<artifactId>springcloud01</artifactId>
+		<version>1.0-SNAPSHOT</version>
+
+	</parent>
+	<groupId>com.zking</groupId>
+	<artifactId>eureka-provider-analyze</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>eureka-provider-analyze</name>
+	<packaging>jar</packaging>
+	<description>是否关注生产者</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+		</dependency>
+	</dependencies>
+</project>

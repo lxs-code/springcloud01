@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovideranzlyze.mapper.ClientMapper">
+    <resultMap id="BaseResultMap" type="com.zking.eurekaprovideranzlyze.model.Client">
+        <constructor>
+            <idArg column="cid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="cname" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="cpassword" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="sex" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bank" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="integral" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="banktime" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="regktime" jdbcType="DATE" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="select" type="com.zking.eurekaprovideranzlyze.vo.ClientVo">
+        <id column="cid" property="cid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="affirm" property="affirm" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="cancel" property="cancel" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="total" property="total" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="click_date" property="click_date" />
+        <result column="count" property="count" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    cid, cname, cpassword, sex, phone, bank, integral
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_client
+        where cid = #{cid,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="select" resultType="com.zking.eurekaprovideranzlyze.vo.ClientVo">
+      select
+       a.count as affirm,b.count as cancel,a.count+b.count as total
+       FROM (
+      SELECT count(bank) as count FROM t_client where bank != '0')
+      as a,
+      (SELECT count(bank) as count FROM t_client where bank = '0' )
+      as b
+  </select>
+    <select id="selectDate" resultMap="select" resultType="com.zking.eurekaprovideranzlyze.vo.ClientVo">
+    select a.click_date,ifnull(b.count,0) as count
+    from (
+        SELECT curdate() as click_date
+        union all
+        SELECT date_sub(curdate(), interval 1 day) as click_date
+        union all
+        SELECT date_sub(curdate(), interval 2 day) as click_date
+        union all
+        SELECT date_sub(curdate(), interval 3 day) as click_date
+        union all
+        SELECT date_sub(curdate(), interval 4 day) as click_date
+        union all
+        SELECT date_sub(curdate(), interval 5 day) as click_date
+        union all
+        SELECT date_sub(curdate(), interval 6 day) as click_date
+    ) a left join (
+      select date(banktime) as datetime, COUNT(bank) as count
+      from t_client where bank != '0'
+      group by date(banktime)
+    ) b on a.click_date = b.datetime;
+    </select>
+    <select id="selectDate1" resultMap="select" resultType="com.zking.eurekaprovideranzlyze.vo.ClientVo">
+select a.click_date,ifnull(b.count,0) as count
+from (
+    SELECT curdate() as click_date
+    union all
+    SELECT date_sub(curdate(), interval 1 day) as click_date
+    union all
+    SELECT date_sub(curdate(), interval 2 day) as click_date
+    union all
+    SELECT date_sub(curdate(), interval 3 day) as click_date
+    union all
+    SELECT date_sub(curdate(), interval 4 day) as click_date
+    union all
+    SELECT date_sub(curdate(), interval 5 day) as click_date
+    union all
+    SELECT date_sub(curdate(), interval 6 day) as click_date
+) a left join (
+  select date(regtime) as datetime, COUNT(cid) as count
+  from t_client where cid != '0'
+  group by date(regtime)
+) b on a.click_date = b.datetime;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_client
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zking.eurekaprovideranzlyze.model.Client">
+    insert into t_client (cid, cname, cpassword, 
+      sex, phone, bank, integral
+      )
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{cpassword,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{bank,jdbcType=BIGINT}, #{integral,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zking.eurekaprovideranzlyze.model.Client">
+        insert into t_client
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="cname != null">
+                cname,
+            </if>
+            <if test="cpassword != null">
+                cpassword,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="bank != null">
+                bank,
+            </if>
+            <if test="integral != null">
+                integral,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cid != null">
+                #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="cname != null">
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="cpassword != null">
+                #{cpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="bank != null">
+                #{bank,jdbcType=BIGINT},
+            </if>
+            <if test="integral != null">
+                #{integral,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.eurekaprovideranzlyze.model.Client">
+        update t_client
+        <set>
+            <if test="cname != null">
+                cname = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="cpassword != null">
+                cpassword = #{cpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="bank != null">
+                bank = #{bank,jdbcType=BIGINT},
+            </if>
+            <if test="integral != null">
+                integral = #{integral,jdbcType=BIGINT},
+            </if>
+        </set>
+        where cid = #{cid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.eurekaprovideranzlyze.model.Client">
+    update t_client
+    set cname = #{cname,jdbcType=VARCHAR},
+      cpassword = #{cpassword,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=BIGINT},
+      integral = #{integral,jdbcType=BIGINT}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>

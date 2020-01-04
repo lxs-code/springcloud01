@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovider.mapper.CommodityMapper">
+    <resultMap id="BaseResultMap" type="com.zking.eurekaprovider.model.Commodity">
+        <constructor>
+            <idArg column="t_comid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="t_comname" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="t_comprice" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="t_comremark" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="t_comnodata" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="t_state" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="t_amount" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="row" type="com.zking.eurekaprovider.model.Commodity">
+
+        <id column="t_comid" property="tComid"/>
+        <result column="t_comname" property="tComname"/>
+        <result column="t_comprice" property="tComprice"/>
+        <result column="t_comremark" property="tComremark"/>
+        <result column="t_comnodata" property="tComnodata"/>
+        <result column="t_state" property="tState"/>
+        <result column="t_amount" property="tAmount"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    t_comid, t_comname, t_comprice, t_comremark, t_comnodata, t_state, t_amount
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_commodity
+        where t_comid = #{tComid,jdbcType=INTEGER}
+    </select>
+    <select id="list" resultMap="row" resultType="com.zking.eurekaprovider.model.Commodity">
+    select
+    *
+    from t_commodity
+    WHERE t_comname like concat('%',#{tComname,jdbcType=VARCHAR },'%')
+    ORDER BY t_comid desc
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_commodity
+    where t_comid = #{tComid,jdbcType=INTEGER}
+    ORDER BY t_comid desc
+  </delete>
+    <insert id="insert" parameterType="com.zking.eurekaprovider.model.Commodity">
+    insert into t_commodity (t_comid, t_comname, t_comprice, 
+      t_comremark, t_comnodata, t_state, 
+      t_amount)
+    values (#{tComid,jdbcType=INTEGER}, #{tComname,jdbcType=VARCHAR}, #{tComprice,jdbcType=DOUBLE},
+      #{tComremark,jdbcType=VARCHAR}, #{tComnodata,jdbcType=TIMESTAMP}, #{tState,jdbcType=INTEGER},
+      #{tAmount,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zking.eurekaprovider.model.Commodity">
+        insert into t_commodity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tComid != null">
+                t_comid,
+            </if>
+            <if test="tComname != null">
+                t_comname,
+            </if>
+            <if test="tComprice != null">
+                t_comprice,
+            </if>
+            <if test="tComremark != null">
+                t_comremark,
+            </if>
+            <if test="tComnodata != null">
+                t_comnodata,
+            </if>
+            <if test="tState != null">
+                t_state,
+            </if>
+            <if test="tAmount != null">
+                t_amount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tComid != null">
+                #{tComid,jdbcType=INTEGER},
+            </if>
+            <if test="tComname != null">
+                #{tComname,jdbcType=VARCHAR},
+            </if>
+            <if test="tComprice != null">
+                #{tComprice,jdbcType=DOUBLE},
+            </if>
+            <if test="tComremark != null">
+                #{tComremark,jdbcType=VARCHAR},
+            </if>
+            <if test="tComnodata != null">
+                #{tComnodata,jdbcType=VARCHAR},
+            </if>
+            <if test="tState != null">
+                #{tState,jdbcType=INTEGER},
+            </if>
+            <if test="tAmount != null">
+                #{tAmount,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.eurekaprovider.model.Commodity">
+        update t_commodity
+        <set>
+            <if test="tComname != null">
+                t_comname = #{tComname,jdbcType=VARCHAR},
+            </if>
+            <if test="tComprice != null">
+                t_comprice = #{tComprice,jdbcType=DOUBLE},
+            </if>
+            <if test="tComremark != null">
+                t_comremark = #{tComremark,jdbcType=VARCHAR},
+            </if>
+            <if test="tComnodata != null">
+                t_comnodata = #{tComnodata,jdbcType=VARCHAR},
+            </if>
+            <if test="tState != null">
+                t_state = #{tState,jdbcType=INTEGER},
+            </if>
+            <if test="tAmount != null">
+                t_amount = #{tAmount,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where t_comid = #{tComid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.eurekaprovider.model.Commodity">
+    update t_commodity
+    set t_comname = #{tComname,jdbcType=VARCHAR},
+      t_comprice = #{tComprice,jdbcType=DOUBLE},
+      t_comremark = #{tComremark,jdbcType=VARCHAR},
+      t_comnodata = #{tComnodata,jdbcType=VARCHAR},
+      t_state = #{tState,jdbcType=INTEGER},
+      t_amount = #{tAmount,jdbcType=VARCHAR}
+    where t_comid = #{tComid,jdbcType=INTEGER}
+  </update>
+    <update id="update" parameterType="com.zking.eurekaprovider.model.Commodity">
+update t_commodity
+set t_comname =?,t_comprice =?,t_comremark =?,t_amount =? where t_comid =?
+</update>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovidershh.mapper.OrganizationPersonMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+    <constructor >
+      <idArg column="orp_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orp_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orp_orgid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orp_date" jdbcType="TIMESTAMP" javaType="java.lang.String" />
+      <arg column="orp_type" jdbcType="BIGINT" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orp_id, orp_name, orp_orgid, orp_date,orp_type
+  </sql>
+  <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_organizationperson
+    where orp_orgid = #{orpOrgid,jdbcType=INTEGER} AND orp_type=1
+    ORDER BY orp_date desc
+  </select>
+
+  <select id="list1" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_organizationperson
+    where orp_orgid = #{orpOrgid,jdbcType=INTEGER} AND orp_type=2
+    ORDER BY orp_date desc
+  </select>
+
+  <select id="list2" resultMap="BaseResultMap" parameterType="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_organizationperson
+    where orp_name  like  concat('%',#{orpName,jdbcType=VARCHAR },'%')
+    ORDER BY orp_date desc
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_organizationperson
+    where orp_id = #{orpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+    insert into tb_organizationperson (orp_id, orp_name, orp_orgid
+     )
+    values (#{orpId,jdbcType=INTEGER}, #{orpName,jdbcType=VARCHAR}, #{orpOrgid,jdbcType=INTEGER}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+    insert into tb_organizationperson
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orpId != null" >
+        orp_id,
+      </if>
+      <if test="orpName != null" >
+        orp_name,
+      </if>
+      <if test="orpOrgid != null" >
+        orp_orgid,
+      </if>
+      <if test="orpDate != null" >
+        orp_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orpId != null" >
+        #{orpId,jdbcType=INTEGER},
+      </if>
+      <if test="orpName != null" >
+        #{orpName,jdbcType=VARCHAR},
+      </if>
+      <if test="orpOrgid != null" >
+        #{orpOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="orpDate != null" >
+        #{orpDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+    update tb_organizationperson
+        SET orp_type=2
+        where orp_id = #{orpId,jdbcType=INTEGER}
+   </update>
+
+  <update id="update" parameterType="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+    update tb_organizationperson
+    SET orp_type=1
+    where orp_id = #{orpId,jdbcType=INTEGER}
+  </update>
+
+
+<update id="updateByPrimaryKey" parameterType="com.zking.eurekaprovidershh.model.OrganizationPerson" >
+update tb_organizationperson
+set orp_name = #{orpName,jdbcType=VARCHAR},
+orp_orgid = #{orpOrgid,jdbcType=INTEGER},
+orp_date = #{orpDate,jdbcType=TIMESTAMP}
+where orp_id = #{orpId,jdbcType=INTEGER}
+</update>
+        </mapper>
