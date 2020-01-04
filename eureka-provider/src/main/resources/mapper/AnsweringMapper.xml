@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovider.mapper.AnsweringMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.eurekaprovider.model.Answering" >
+    <constructor >
+      <idArg column="anid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="antype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="createdata" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="aaction" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="kid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="createid" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zking.eurekaprovider.model.Answering" >
+    <constructor >
+      <idArg column="anid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="antype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="createdata" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="aaction" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="kid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="createid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="answering" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    anid, antype, createdata, aaction, kid, createid
+  </sql>
+  <sql id="Blob_Column_List" >
+    answering
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_answering
+    where anid = #{anid,jdbcType=BIGINT}
+  </select>
+    <select id="AnsweringList" resultMap="ResultMapWithBLOBs"    parameterType="java.lang.Long" >
+select *  from    t_answering   where kid =#{kid,jdbcType=BIGINT}
+
+    </select>
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_answering
+    where anid = #{anid,jdbcType=BIGINT}
+  </delete>
+  <delete id="delbyan"  parameterType="java.lang.Long" >
+      delete from t_answering
+    where kid = #{kid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.eurekaprovider.model.Answering" >
+    insert into t_answering (anid, antype, createdata, 
+      aaction, kid, createid, 
+      answering)
+    values (#{anid,jdbcType=BIGINT}, #{antype,jdbcType=INTEGER}, #{createdata,jdbcType=TIMESTAMP}, 
+      #{aaction,jdbcType=INTEGER}, #{kid,jdbcType=BIGINT}, #{createid,jdbcType=BIGINT}, 
+      #{answering,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.eurekaprovider.model.Answering" >
+    insert into t_answering
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="anid != null" >
+        anid,
+      </if>
+      <if test="antype != null" >
+        antype,
+      </if>
+      <if test="createdata != null" >
+        createdata,
+      </if>
+      <if test="aaction != null" >
+        aaction,
+      </if>
+      <if test="kid != null" >
+        kid,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="answering != null" >
+        answering,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="anid != null" >
+        #{anid,jdbcType=BIGINT},
+      </if>
+      <if test="antype != null" >
+        #{antype,jdbcType=INTEGER},
+      </if>
+      <if test="createdata != null" >
+        #{createdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aaction != null" >
+        #{aaction,jdbcType=INTEGER},
+      </if>
+      <if test="kid != null" >
+        #{kid,jdbcType=BIGINT},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="answering != null" >
+        #{answering,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.eurekaprovider.model.Answering" >
+    update t_answering
+    <set >
+      <if test="antype != null" >
+        antype = #{antype,jdbcType=INTEGER},
+      </if>
+      <if test="createdata != null" >
+        createdata = #{createdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aaction != null" >
+        aaction = #{aaction,jdbcType=INTEGER},
+      </if>
+      <if test="kid != null" >
+        kid = #{kid,jdbcType=BIGINT},
+      </if>
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="answering != null" >
+        answering = #{answering,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where anid = #{anid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zking.eurekaprovider.model.Answering" >
+    update t_answering
+    set antype = #{antype,jdbcType=INTEGER},
+      createdata = #{createdata,jdbcType=TIMESTAMP},
+      aaction = #{aaction,jdbcType=INTEGER},
+      kid = #{kid,jdbcType=BIGINT},
+      createid = #{createid,jdbcType=BIGINT},
+      answering = #{answering,jdbcType=LONGVARCHAR}
+    where anid = #{anid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.eurekaprovider.model.Answering" >
+    update t_answering
+    set antype = #{antype,jdbcType=INTEGER},
+      createdata = #{createdata,jdbcType=TIMESTAMP},
+      aaction = #{aaction,jdbcType=INTEGER},
+      kid = #{kid,jdbcType=BIGINT},
+      createid = #{createid,jdbcType=BIGINT}
+    where anid = #{anid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -34,6 +34,8 @@
   <sql id="Base_Column_List" >
     user_id, user_AccountNmber, user_cipher, user_key, locked
   </sql>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zking.eurekaprovider.model.User" >
     select
     <include refid="Base_Column_List" />
@@ -51,7 +53,12 @@
     select distinct r.t_role_name,r.t_role_id,r.t_role_available,r.t_role_description
     from t_user u inner join t_role_user ur on u.user_id = ur.uid inner join t_role r on ur.rid = r.t_role_id
     where r.t_role_available = 1 and u.user_AccountNmber =  #{userAccountnmber,jdbcType=VARCHAR}
-
+  </select>
+  <select id="selectBykey" resultMap="BaseResultMap" parameterType="user">
+    select
+   *
+    from t_user
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.eurekaprovider.mapper.keywordMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.eurekaprovider.model.keyword" >
+    <constructor >
+      <idArg column="kid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="keyword" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="kcid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="kaction" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="createdata" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="createid" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    kid, keyword, kcid, kaction, createdata, createid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_keyword
+    where kid = #{kid,jdbcType=BIGINT}
+  </select>
+    <select id="keywordList" resultMap="BaseResultMap" parameterType="keyword">
+
+      select
+      <include refid="Base_Column_List" />
+      from t_keyword
+      where
+      keyword like concat('%',#{keyword,jdbcType=VARCHAR },'%')   order by  createdata    desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_keyword
+    where kid = #{kid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.eurekaprovider.model.keyword" >
+    insert into t_keyword (kid, keyword, kcid, 
+      kaction, createdata, createid
+      )
+    values (#{kid,jdbcType=BIGINT}, #{keyword,jdbcType=VARCHAR}, #{kcid,jdbcType=BIGINT}, 
+      #{kaction,jdbcType=INTEGER}, #{createdata,jdbcType=TIMESTAMP}, #{createid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.eurekaprovider.model.keyword"   useGeneratedKeys="true" keyProperty="kid">
+    insert into t_keyword
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kid != null" >
+        kid,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="kcid != null" >
+        kcid,
+      </if>
+      <if test="kaction != null" >
+        kaction,
+      </if>
+      <if test="createdata != null" >
+        createdata,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kid != null" >
+        #{kid,jdbcType=BIGINT},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="kcid != null" >
+        #{kcid,jdbcType=BIGINT},
+      </if>
+      <if test="kaction != null" >
+        #{kaction,jdbcType=INTEGER},
+      </if>
+      <if test="createdata != null" >
+        #{createdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=BIGINT},
+      </if>
+    </trim>
+
+
+    <selectKey resultType="java.lang.Long" order="AFTER"
+              keyProperty="kid">
+                SELECT LAST_INSERT_ID()
+           </selectKey>
+
+
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.eurekaprovider.model.keyword" >
+    update t_keyword
+    <set >
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="kcid != null" >
+        kcid = #{kcid,jdbcType=BIGINT},
+      </if>
+      <if test="kaction != null" >
+        kaction = #{kaction,jdbcType=INTEGER},
+      </if>
+      <if test="createdata != null" >
+        createdata = #{createdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where kid = #{kid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.eurekaprovider.model.keyword" >
+    update t_keyword
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      kcid = #{kcid,jdbcType=BIGINT},
+      kaction = #{kaction,jdbcType=INTEGER},
+      createdata = #{createdata,jdbcType=TIMESTAMP},
+      createid = #{createid,jdbcType=BIGINT}
+    where kid = #{kid,jdbcType=BIGINT}
+  </update>
+</mapper>

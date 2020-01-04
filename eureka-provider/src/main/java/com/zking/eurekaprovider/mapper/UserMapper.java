@@ -26,4 +26,7 @@ public interface UserMapper {
 
 
    Role listRolesByUserName(User user);//查询指定用户拥有的角色
+
+
+    User  selectBykey(User user);
 }

@@ -10,6 +10,11 @@ class EurekaProviderApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}
 
+	}
+	public static void main(String[] args) {
+		String sa="[{\"category\":\"<p>asdasdadasd</p>\"}]";
+
+		System.out.println("-------"+sa+"--------");
+	}
 }

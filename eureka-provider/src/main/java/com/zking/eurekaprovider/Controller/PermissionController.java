@@ -76,27 +76,22 @@ jsonData.setCode(0);
         String[] splits = li.split("-");
         List<RolePermission>   del=new ArrayList<>();
         List<RolePermission>   inte=new ArrayList<>();
-         for (  String s:splits ) {
+         for (String s:splits ) {
             if(ac.contains(s)){
-
             }else{
                 System.out.println("不包含"+s);
-                //删除
                 RolePermission rolePermission=new RolePermission();
                 rolePermission.setPid((long)Integer.parseInt(s));
                 rolePermission.setRid(rid);
                 perssionServer.delPermission(rolePermission);
             }
         }
-        for (  String s:split ) {
+        for (String s:split ) {
             if(li.contains(s)){
-
             }else{
-
                 RolePermission rolePermission=new RolePermission();
                 rolePermission.setPid((long)Integer.parseInt(s));
                 rolePermission.setRid(rid);
-                //增加
                 perssionServer.intPermission(rolePermission);
             }
         }

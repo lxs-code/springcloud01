@@ -37,7 +37,6 @@ public class PerssionServerImpl implements PerssionServer {
 
     @Override
     public List<Permission> getPermissions() {
-//        Permission permissiond=new Permission();
         List<Permission> permission = permissionMapper.LISTperms();
         for (Permission ss : permission) {
             List<Permission> permissions = permissionMapper.listPermissions(ss);
